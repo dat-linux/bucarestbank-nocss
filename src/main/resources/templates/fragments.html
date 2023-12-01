@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <header id="titleBox">
+    <hgroup>
+        <h1>BUCAREST Bank</h2>
+        <h2>Pico CSS (classless)</h2>
+    </hgroup>
+  </header>
+
+  <div id="clientErrorBox" x-show="inputAmountInvalid" x-text="inputAmountInvalidMessage">
+    <button></button>
+  </div>
+
+  <div id="serverErrorBox" x-data="{ showError : false, errorMessage : '' }" x-show="showError" x-text="errorMessage"
+    x-on:htmx:before-send.window="showError = false; errorMessage = '';"
+    x-on:htmx:response-error.window="showError = true; errorMessage = $event.detail.xhr.responseText;">
+    <button></button>
+  </div>
+
+  <footer id="appFooter">
+      <small>
+        <p> &copy; Copyright The SOFEA Creators</p>
+      </small>
+  </footer>
+
+</body>
+
+</html>
