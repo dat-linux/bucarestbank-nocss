@@ -9,7 +9,7 @@
 <body x-data="{ activeForm: 'transfer' }">
 
   <!-- Common accountNumber to be used by all fragments -->
-  <input type="hidden" name="accountNumber" id="accountNumber" value="123456789" />
+  <input name="accountNumber" id="accountNumber" value="123456789" />
 
   <!-- Bank Title Row -->
   <header th:replace="~{fragments :: #titleBox }"></header>
@@ -33,30 +33,40 @@
     </section>
 
     <!-- Account Details Component -->
-    <section 
-      hx-trigger="load, transactions from:body" 
-      hx-get="/accountDetails" 
-      hx-include="#accountNumber"
-      hx-target="#accountDetails"
-      hx-swap="outerHTML">
+    <section>
       <card>
-        <header>Account details</header>
+        <header hx-trigger="load"
+      			hx-get="/accountDetails"
+      			hx-include="#accountNumber"
+      			hx-target="#accountDetails"
+      			hx-swap="outerHTML">Account details</header>
         <table id="accountDetails">
           <th colspan="2"><strong>Information</strong></th>
           <tr><td>Account number:</td><td><span th:text="${account?.accountNumber ?: 'N/A'}"></span></td></tr>
           <tr><td>Account name:</td><td><span th:text="${account?.accountName ?: 'N/A'}"></span></td></tr>
           <tr><td>Current interest rate:</td><td><span th:text="${#numbers.formatPercent((account?.currentInterestRate ?: 0.0), 1, 2)}"></span></td></tr>
+        </table>
+      </card>
+      <card>
+        <header hx-trigger="load, account.currentBalance from:body"
+      			hx-get="/accountBalance"
+      			hx-include="#accountNumber"
+      			hx-target="#accountBalance"
+      			hx-swap="outerHTML">Account balance</header>
+        <table id="accountBalance">
           <th colspan="2"><strong>Balance</strong></th>
           <tr><td>Current balance:</td><td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td></tr>
           <tr><td>Available:</td><td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td></tr>
         </table>
+
       </card>
     </section>
 
     <!-- Transaction History Component -->
-    <section hx-trigger="load" 
+    <section
+          hx-trigger="load, transactions from:body"
           hx-get="/transactions"
-          hx-include="#accountNumber" 
+          hx-include="#accountNumber"
           hx-target="#transactionsContent"
           hx-swap="outerHTML">
       <card>
@@ -90,11 +100,11 @@
         </header>
 
         <!-- Transfer Funds Form -->
-        <form x-show="activeForm === 'transfer'" 
-              post="#" 
+        <form x-show="activeForm === 'transfer'"
+              post="#"
               hx-post="/api/v1/payments"
-              hx-include="#accountNumber" 
-              hx-swap="none" 
+              hx-include="#accountNumber"
+              hx-swap="none"
               x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Transfer amount invalid' }">
           <!-- Account Number field -->
           <div>
@@ -102,7 +112,7 @@
             <input id="payToAccountNumber" name="payToAccountNumber" value="987654321" readonly></input>
           </div>
           <!-- Amount field -->
-          <div x-data="{ inputAmount : 100.00 }" 
+          <div x-data="{ inputAmount : 100.00 }"
                x-init="$watch( 'inputAmount', (value) => inputAmountInvalid = ( value <= 0 ) )">
             <label for="transferAmount">Amount</label>
             <div>
@@ -119,10 +129,10 @@
         </form>
 
         <!-- Pay Bill Form -->
-        <form x-show="activeForm === 'paybill'" 
-              post="#" 
-              hx-post="/api/v1/payments" 
-              hx-include="#accountNumber" 
+        <form x-show="activeForm === 'paybill'"
+              post="#"
+              hx-post="/api/v1/payments"
+              hx-include="#accountNumber"
               hx-swap="none"
               x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Bill payment amount invalid' }">
           <div>
@@ -132,7 +142,7 @@
               <input id="billerId" name="billerId" value="48443877" readonly />
             </div>
             <!-- Amount field -->
-            <div x-data="{ inputAmount : 150.00 }" 
+            <div x-data="{ inputAmount : 150.00 }"
                   x-init="$watch( 'inputAmount', (value) => inputAmountInvalid = ( value <= 0 ) )">
               <label for="billAmount">Amount</label>
               <div>
