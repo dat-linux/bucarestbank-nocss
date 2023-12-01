@@ -9,7 +9,7 @@
 <body x-data="{ activeForm: 'transfer' }">
 
   <!-- Common accountNumber to be used by all fragments -->
-  <input name="accountNumber" id="accountNumber" value="123456789" />
+  <input type="hidden" name="accountNumber" id="accountNumber" value="123456789" />
 
   <!-- Bank Title Row -->
   <header th:replace="~{fragments :: #titleBox }"></header>

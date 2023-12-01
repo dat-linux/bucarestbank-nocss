@@ -35,6 +35,6 @@ public class AccountController {
     Account account = accountService.getAccount( accountNumber );
     model.addAttribute( "account", account );
 
-    return "index :: #balanceContent";
+    return "index :: #accountBalance";
   }
 }
