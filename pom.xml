@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bucarestbank</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>bucarest-bank</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>demo</name>
+	<name>Bucarest Bank</name>
 	<description>Demo application for the BUCAREST architecture</description>
 	<properties>
 		<java.version>17</java.version>
