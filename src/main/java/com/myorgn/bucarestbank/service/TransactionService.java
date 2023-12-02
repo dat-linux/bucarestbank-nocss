@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.myorgn.bucarestbank.entity.Account;
 import com.myorgn.bucarestbank.entity.Transaction;
-import com.myorgn.bucarestbank.repository.AccountRepository;
 import com.myorgn.bucarestbank.repository.TransactionRepository;
-
 
 @Service
 public class TransactionService {

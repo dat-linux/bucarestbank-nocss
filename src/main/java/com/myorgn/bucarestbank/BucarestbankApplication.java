@@ -26,7 +26,6 @@ public class BucarestbankApplication {
       Account account = new Account("123456789", "John Doe", 0.05, 1000.0);
       Transaction initialTransaction = new Transaction(account, LocalDateTime.now(), false, 1000.0, "Initial balance");
       account.addTransaction(initialTransaction);
-
       accountRepo.save(account);
     };
   }

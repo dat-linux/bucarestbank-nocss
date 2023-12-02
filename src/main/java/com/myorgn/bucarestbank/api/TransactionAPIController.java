@@ -2,7 +2,6 @@ package com.myorgn.bucarestbank.api;
 
 import java.time.LocalDateTime;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +22,7 @@ public class TransactionAPIController {
   AccountService accountService;
   TransactionService transactionService;
 
-  @Autowired
+  // @Autowired
   public TransactionAPIController(AccountService accountService,
       TransactionService transactionService) {
     this.accountService = accountService;
@@ -35,6 +34,7 @@ public class TransactionAPIController {
       @RequestParam("accountNumber") String accountNumber,
       @RequestParam("amount") Double amount,
       @RequestParam("description") String description) {
+
     // Process payment and update DB
     Account account = accountService.getAccount(accountNumber);
 
@@ -60,4 +60,5 @@ public class TransactionAPIController {
 
     return new ResponseEntity<>(headers, HttpStatus.OK);
   }
+  
 }
