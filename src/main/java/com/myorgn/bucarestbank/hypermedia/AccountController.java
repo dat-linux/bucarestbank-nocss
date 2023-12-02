@@ -22,7 +22,7 @@ public class AccountController {
   public String accountDetails(@RequestParam("accountNumber") String accountNumber, Model model) {
     // Fetch and add account details to model
     Account account = accountService.getAccount(accountNumber);
-    model.addAttribute( "account", account);
+    model.addAttribute("account", account);
     return "index :: #accountDetails";
   }
 
@@ -30,7 +30,7 @@ public class AccountController {
   public String accountBalance(@RequestParam("accountNumber") String accountNumber, Model model) {
     // Fetch and add account balance to model
     Account account = accountService.getAccount(accountNumber);
-    model.addAttribute( "account", account);
+    model.addAttribute("account", account);
     return "index :: #accountBalance";
   }
 }

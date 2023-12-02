@@ -112,7 +112,7 @@
           </div>
           <!-- Amount field -->
           <div x-data="{ inputAmount : 100.00 }"
-               x-init="$watch( 'inputAmount', (value) => inputAmountInvalid = ( value <= 0 ) )">
+               x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
             <label for="transferAmount">Amount</label>
             <div>
               <span>$</span>
@@ -142,7 +142,7 @@
             </div>
             <!-- Amount field -->
             <div x-data="{ inputAmount : 150.00 }"
-                  x-init="$watch( 'inputAmount', (value) => inputAmountInvalid = ( value <= 0 ) )">
+                  x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
               <label for="billAmount">Amount</label>
               <div>
                 <span>$</span>

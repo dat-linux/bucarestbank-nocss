@@ -39,12 +39,12 @@ public class TransactionAPIController {
     Account account = accountService.getAccount(accountNumber);
 
     // Check for valid amount
-    if (amount <= 0 ) {
+    if(amount <= 0) {
       return ResponseEntity.badRequest().body("Invalid amount");
     }
 
     // Check for sufficient funds
-    if (account.getCurrentBalance() < amount) {
+    if(account.getCurrentBalance() < amount) {
       return ResponseEntity.badRequest().body("Insufficient funds");
     }
 

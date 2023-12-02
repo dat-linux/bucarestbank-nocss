@@ -15,8 +15,8 @@ public class TransactionService {
 
     @Autowired
     private TransactionRepository transactionRepository;
-
-    public List<Transaction> getSortedTransactionsForAccount( Account account ) {
+    
+    public List<Transaction> getSortedTransactionsForAccount(Account account) {
         return transactionRepository.findByAccount(account, Sort.by(Sort.Order.desc("transactionDate")));
     }
 }

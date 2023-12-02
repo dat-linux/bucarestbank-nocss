@@ -12,7 +12,7 @@ public class AccountService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account getAccount( String accountNumber ) {
+    public Account getAccount(String accountNumber) {
         return accountRepository.findById(accountNumber).isPresent() ? accountRepository.findById(accountNumber).get() : null;
     }
 

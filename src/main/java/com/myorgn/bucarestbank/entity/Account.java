@@ -64,7 +64,7 @@ public class Account {
     this.currentBalance = currentBalance;
   }
 
-  public void addTransaction( Transaction transaction ) {
+  public void addTransaction(Transaction transaction) {
     transactions.add(transaction);
     transaction.setAccount(this);
   }
