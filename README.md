@@ -13,13 +13,13 @@
 
 Run from project dir:
 
-`mvn install`
+`./mvnw install`
 
 ## Run
 
 Run from project dir:
 
-`mvn spring-boot:run`
+`./mvnw spring-boot:run`
 
 Then point your browser at `http://localhost:8081` to see the online banking screen. HTML coding changes under `src/main/resources` are dynamic but require page refreshes.
 
@@ -29,7 +29,7 @@ Also open the browser console to see the HTTP requests and responses.
 
 Build a war file:
 
-`mvn clean package`
+`./mvnw clean package`
 
 ## NOTES:
 
