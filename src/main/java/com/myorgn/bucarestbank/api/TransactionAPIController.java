@@ -37,7 +37,7 @@ public class TransactionAPIController {
 
     // Process payment and update DB
     Account account = accountService.getAccount(accountNumber);
-
+    
     // Check for valid amount
     if(amount <= 0) {
       return ResponseEntity.badRequest().body("Invalid amount");
@@ -46,7 +46,7 @@ public class TransactionAPIController {
     // Check for sufficient funds
     if(account.getCurrentBalance() < amount) {
       return ResponseEntity.badRequest().body("Insufficient funds");
-    }
+}
 
     Transaction transaction = new Transaction(account, LocalDateTime.now(), true, amount, description);
     Double previousBalance = account.getCurrentBalance();

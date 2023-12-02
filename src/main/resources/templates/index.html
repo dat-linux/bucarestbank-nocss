@@ -21,12 +21,14 @@
       <nav>
         <ul>
           <li>
-            <a active href="#" x-bind:class="{ '': activeForm === 'transfer' }"
-              x-on:click.prevent="activeForm = 'transfer'">Transfer Funds</a>
+            <a active href="#" 
+               x-bind:class="{ '': activeForm === 'transfer' }"
+               x-on:click.prevent="activeForm = 'transfer'">Transfer Funds</a>
           </li>
           <li>
-            <a href="#" x-bind:class="{ '': activeForm === 'paybill' }"
-              x-on:click.prevent="activeForm = 'paybill'">Pay Bill</a>
+            <a href="#" 
+               x-bind:class="{ '': activeForm === 'paybill' }"
+               x-on:click.prevent="activeForm = 'paybill'">Pay Bill</a>
           </li>
         </ul>
       </nav>
@@ -36,10 +38,10 @@
     <section>
       <card>
         <header hx-trigger="load"
-      			hx-get="/accountDetails"
-      			hx-include="#accountNumber"
-      			hx-target="#accountDetails"
-      			hx-swap="outerHTML">Account details</header>
+                hx-get="/accountDetails"
+                hx-include="#accountNumber"
+                hx-target="#accountDetails"
+                hx-swap="outerHTML">Account details</header>
         <table id="accountDetails">
           <th colspan="2"><strong>Information</strong></th>
           <tr><td>Account number:</td><td><span th:text="${account?.accountNumber ?: 'N/A'}"></span></td></tr>
@@ -49,10 +51,10 @@
       </card>
       <card>
         <header hx-trigger="load, account.currentBalance from:body"
-      			hx-get="/accountBalance"
-      			hx-include="#accountNumber"
-      			hx-target="#accountBalance"
-      			hx-swap="outerHTML">Account balance</header>
+                hx-get="/accountBalance"
+                hx-include="#accountNumber"
+                hx-target="#accountBalance"
+                hx-swap="outerHTML">Account balance</header>
         <table id="accountBalance">
           <th colspan="2"><strong>Balance</strong></th>
           <tr><td>Current balance:</td><td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td></tr>
@@ -62,12 +64,11 @@
     </section>
 
     <!-- Transaction History Component -->
-    <section
-          hx-trigger="load, transactions from:body"
-          hx-get="/transactions"
-          hx-include="#accountNumber"
-          hx-target="#transactionsContent"
-          hx-swap="outerHTML">
+    <section hx-trigger="load, transactions from:body"
+             hx-get="/transactions"
+             hx-include="#accountNumber"
+             hx-target="#transactionsContent"
+             hx-swap="outerHTML">
       <card>
         <header>Transaction History</header>
         <table>
@@ -168,6 +169,7 @@
     </section>
 
   </main>
+
 
   <!-- Footer -->
   <footer th:replace="~{fragments :: #appFooter}"></footer>
