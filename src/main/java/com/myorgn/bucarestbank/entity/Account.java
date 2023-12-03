@@ -77,4 +77,5 @@ public class Account {
     return "Account [accountNumber=" + accountNumber + ", accountName=" + accountName + ", currentInterestRate="
         + currentInterestRate + ", currentBalance=" + currentBalance + "]";
   }
+  
 }

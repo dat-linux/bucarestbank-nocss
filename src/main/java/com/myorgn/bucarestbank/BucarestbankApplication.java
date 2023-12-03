@@ -20,13 +20,22 @@ public class BucarestbankApplication {
   }
 
   @Bean
-  public CommandLineRunner demoData(AccountRepository accountRepo, TransactionRepository transactionRepo) {
+  public CommandLineRunner demoData(AccountRepository accountRepo, 
+                                    TransactionRepository transactionRepo) {
     return args -> {
       // Add some demo accounts and transactions...
-      Account account = new Account("123456789", "John Doe", 0.05, 1000.0);
-      Transaction initialTransaction = new Transaction(account, LocalDateTime.now(), false, 1000.0, "Initial balance");
-      account.addTransaction(initialTransaction);
+      Account account = new Account("123456789", 
+                                    "John Doe", 
+                                    0.05, 
+                                    1000.0);
+      Transaction initTrans = new Transaction(account, 
+                                                       LocalDateTime.now(), 
+                                                       false, 
+                                                       1000.0, 
+                                                       "Initial balance");
+      account.addTransaction(initTrans);
       accountRepo.save(account);
     };
   }
+
 }
