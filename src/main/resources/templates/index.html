@@ -21,14 +21,12 @@
       <nav>
         <ul>
           <li>
-            <a active href="#" 
-               x-bind:class="{ '': activeForm === 'transfer' }"
-               x-on:click.prevent="activeForm = 'transfer'">Transfer Funds</a>
+            <a active href="#" x-bind:class="{ '': activeForm === 'transfer' }"
+              x-on:click.prevent="activeForm = 'transfer'">Transfer Funds</a>
           </li>
           <li>
-            <a href="#" 
-               x-bind:class="{ '': activeForm === 'paybill' }"
-               x-on:click.prevent="activeForm = 'paybill'">Pay Bill</a>
+            <a href="#" x-bind:class="{ '': activeForm === 'paybill' }" x-on:click.prevent="activeForm = 'paybill'">Pay
+              Bill</a>
           </li>
         </ul>
       </nav>
@@ -37,38 +35,44 @@
     <!-- Account Details Component -->
     <section>
       <card>
-        <header hx-trigger="load"
-                hx-get="/accountDetails"
-                hx-include="#accountNumber"
-                hx-target="#accountDetails"
-                hx-swap="outerHTML">Account details</header>
+        <header hx-trigger="load" hx-get="/accountDetails" hx-include="#accountNumber" hx-target="#accountDetails"
+          hx-swap="outerHTML">Account details</header>
         <table id="accountDetails">
           <th colspan="2"><strong>Information</strong></th>
-          <tr><td>Account number:</td><td><span th:text="${account?.accountNumber ?: 'N/A'}"></span></td></tr>
-          <tr><td>Account name:</td><td><span th:text="${account?.accountName ?: 'N/A'}"></span></td></tr>
-          <tr><td>Current interest rate:</td><td><span th:text="${#numbers.formatPercent((account?.currentInterestRate ?: 0.0), 1, 2)}"></span></td></tr>
+          <tr>
+            <td>Account number:</td>
+            <td><span th:text="${account?.accountNumber ?: 'N/A'}"></span></td>
+          </tr>
+          <tr>
+            <td>Account name:</td>
+            <td><span th:text="${account?.accountName ?: 'N/A'}"></span></td>
+          </tr>
+          <tr>
+            <td>Current interest rate:</td>
+            <td><span th:text="${#numbers.formatPercent((account?.currentInterestRate ?: 0.0), 1, 2)}"></span></td>
+          </tr>
         </table>
       </card>
       <card>
-        <header hx-trigger="load, account.currentBalance from:body"
-                hx-get="/accountBalance"
-                hx-include="#accountNumber"
-                hx-target="#accountBalance"
-                hx-swap="outerHTML">Account balance</header>
+        <header hx-trigger="load, account.currentBalance from:body" hx-get="/accountBalance" hx-include="#accountNumber"
+          hx-target="#accountBalance" hx-swap="outerHTML">Account balance</header>
         <table id="accountBalance">
           <th colspan="2"><strong>Balance</strong></th>
-          <tr><td>Current balance:</td><td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td></tr>
-          <tr><td>Available:</td><td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td></tr>
+          <tr>
+            <td>Current balance:</td>
+            <td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td>
+          </tr>
+          <tr>
+            <td>Available:</td>
+            <td><span th:text="${#numbers.formatCurrency(account?.currentBalance ?: 0.0)}"></span></td>
+          </tr>
         </table>
       </card>
     </section>
 
     <!-- Transaction History Component -->
-    <section hx-trigger="load, transactions from:body"
-             hx-get="/transactions"
-             hx-include="#accountNumber"
-             hx-target="#transactionsContent"
-             hx-swap="outerHTML">
+    <section hx-trigger="load, transactions from:body" hx-get="/transactions" hx-include="#accountNumber"
+      hx-target="#transactionsContent" hx-swap="outerHTML">
       <card>
         <header>Transaction History</header>
         <table>
@@ -100,12 +104,8 @@
         </header>
 
         <!-- Transfer Funds Form -->
-        <form x-show="activeForm === 'transfer'"
-              post="#"
-              hx-post="/api/v1/payments"
-              hx-include="#accountNumber"
-              hx-swap="none"
-              x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Transfer amount invalid' }">
+        <form x-show="activeForm === 'transfer'" post="#" hx-post="/api/v1/payments" hx-include="#accountNumber"
+          hx-swap="none" x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Transfer amount invalid' }">
           <!-- Account Number field -->
           <div>
             <label for="payToAccountNumber">Pay to account</label>
@@ -113,7 +113,7 @@
           </div>
           <!-- Amount field -->
           <div x-data="{ inputAmount : 100.00 }"
-               x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
+            x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
             <label for="transferAmount">Amount</label>
             <div>
               <span>$</span>
@@ -129,12 +129,9 @@
         </form>
 
         <!-- Pay Bill Form -->
-        <form x-show="activeForm === 'paybill'"
-              post="#"
-              hx-post="/api/v1/payments"
-              hx-include="#accountNumber"
-              hx-swap="none"
-              x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Bill payment amount invalid' }">
+        <form x-show="activeForm === 'paybill'" post="#" hx-post="/api/v1/payments" hx-include="#accountNumber"
+          hx-swap="none"
+          x-data="{ inputAmountInvalid : false, inputAmountInvalidMessage : 'Bill payment amount invalid' }">
           <div>
             <!-- Biller ID field -->
             <div>
@@ -143,13 +140,14 @@
             </div>
             <!-- Amount field -->
             <div x-data="{ inputAmount : 150.00 }"
-                  x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
+              x-init="$watch('inputAmount', (value) => inputAmountInvalid = (value <= 0))">
               <label for="billAmount">Amount</label>
               <div>
                 <span>$</span>
-                <input id="billAmount" x-model.number="inputAmount" name="amount" required></div></input>
-              </div>
+                <input id="billAmount" x-model.number="inputAmount" name="amount" required>
+              </div></input>
             </div>
+          </div>
           </div>
           <!-- Description field -->
           <div>

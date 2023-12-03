@@ -15,22 +15,20 @@ import com.myorgn.bucarestbank.service.TransactionService;
 @Controller
 public class TransactionController {
 
-  AccountService accountService;
-  TransactionService transactionService;
+    AccountService accountService;
+    TransactionService transactionService;
 
-  public TransactionController(AccountService accountService, 
-                               TransactionService transactionService) {
-    this.accountService = accountService;
-    this.transactionService = transactionService;
-  }   
+    public TransactionController(AccountService accountService, TransactionService transactionService) {
+        this.accountService = accountService;
+        this.transactionService = transactionService;
+    }
 
-  @GetMapping("/transactions")
-  public String getTransactions(@RequestParam("accountNumber") String accountNumber, 
-                                Model model) {
-    Account account = accountService.getAccount(accountNumber);
-    List<Transaction> transactions = transactionService.getSortedTransactionsForAccount(account);
-    model.addAttribute("transactions", transactions);
-    return "index :: #transactionsContent";
-  }
+    @GetMapping("/transactions")
+    public String getTransactions(@RequestParam("accountNumber") String accountNumber, Model model) {
+        Account account = accountService.getAccount(accountNumber);
+        List<Transaction> transactions = transactionService.getSortedTransactionsForAccount(account);
+        model.addAttribute("transactions", transactions);
+        return "index :: #transactionsContent";
+    }
 
 }

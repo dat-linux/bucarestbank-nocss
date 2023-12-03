@@ -11,7 +11,7 @@ import com.myorgn.bucarestbank.entity.Transaction;
 
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
-  
-  List<Transaction> findByAccount(Account account, Sort sort);
-  
+
+    List<Transaction> findByAccount(Account account, Sort sort);
+
 }

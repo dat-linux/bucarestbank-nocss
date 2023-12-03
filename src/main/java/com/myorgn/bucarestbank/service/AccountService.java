@@ -13,7 +13,8 @@ public class AccountService {
     private AccountRepository accountRepository;
 
     public Account getAccount(String accountNumber) {
-        return accountRepository.findById(accountNumber).isPresent() ? accountRepository.findById(accountNumber).get() : null;
+        return accountRepository.findById(accountNumber).isPresent() ? accountRepository.findById(accountNumber).get()
+                : null;
     }
 
     public Account saveAccount(Account account) {
