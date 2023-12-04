@@ -6,6 +6,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myorgn.bucarestbank.entity.Account;
 import com.myorgn.bucarestbank.entity.Transaction;
@@ -13,7 +15,13 @@ import com.myorgn.bucarestbank.repository.AccountRepository;
 import com.myorgn.bucarestbank.repository.TransactionRepository;
 
 @SpringBootApplication
+@Controller
 public class BucarestbankApplication {
+
+    @RequestMapping("/bulma")
+    public String welcome() {
+        return "bulma";
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(BucarestbankApplication.class, args);
