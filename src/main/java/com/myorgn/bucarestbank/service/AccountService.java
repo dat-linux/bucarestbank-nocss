@@ -8,16 +8,18 @@ import com.myorgn.bucarestbank.repository.AccountRepository;
 
 @Service
 public class AccountService {
-
+    
     @Autowired
     private AccountRepository accountRepository;
-
+    
     public Account getAccount(String accountNumber) {
-        return accountRepository.findById(accountNumber).isPresent() ? accountRepository.findById(accountNumber).get()
-                : null;
+        return accountRepository.findById(accountNumber).isPresent() ? 
+            accountRepository.findById(accountNumber).get() : 
+            null;
     }
 
     public Account saveAccount(Account account) {
         return accountRepository.save(account);
     }
+
 }

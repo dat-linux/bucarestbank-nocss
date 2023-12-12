@@ -19,47 +19,50 @@ import com.myorgn.bucarestbank.service.TransactionService;
 @RequestMapping("/api/v1")
 public class TransactionAPIController {
 
-    AccountService accountService;
-    TransactionService transactionService;
+	AccountService accountService;
+	TransactionService transactionService;
 
-    // @Autowired
-    public TransactionAPIController(AccountService accountService, TransactionService transactionService) {
-        this.accountService = accountService;
-        this.transactionService = transactionService;
-    }
+	// @Autowired
+	public TransactionAPIController(AccountService accountService,
+			TransactionService transactionService) {
+		this.accountService = accountService;
+		this.transactionService = transactionService;
+	}
 
-    @PostMapping("/payments")
-    public ResponseEntity<?> makePayment(@RequestParam("accountNumber") String accountNumber,
-            @RequestParam("amount") Double amount, @RequestParam("description") String description) {
+	@PostMapping("/payments")
+	public ResponseEntity<?> makePayment(@RequestParam("accountNumber") String accountNumber,
+			@RequestParam("amount") Double amount,
+			@RequestParam("description") String description) {
 
-        // Process payment and update DB
-        Account account = accountService.getAccount(accountNumber);
+		// Process payment and update DB
+		Account account = accountService.getAccount(accountNumber);
 
-        // Check for valid amount
-        if (amount <= 0) {
-            return ResponseEntity.badRequest().body("Invalid amount");
-        }
+		// Check for valid amount
+		if (amount <= 0) {
+			return ResponseEntity.badRequest().body("Invalid amount");
+		}
 
-        // Check for sufficient funds
-        if (account.getCurrentBalance() < amount) {
-            return ResponseEntity.badRequest().body("Insufficient funds");
-        }
+		// Check for sufficient funds
+		if (account.getCurrentBalance() < amount) {
+			return ResponseEntity.badRequest().body("Insufficient funds");
+		}
 
-        updateAccount(amount, description, account);
+		updateAccount(amount, description, account);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("HX-Trigger", "account.currentBalance");
-        headers.add("HX-Trigger", "transactions");
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("HX-Trigger", "account.currentBalance");
+		headers.add("HX-Trigger", "transactions");
 
-        return new ResponseEntity<>(headers, HttpStatus.OK);
-    }
+		return new ResponseEntity<>(headers, HttpStatus.OK);
+	}
 
-    private void updateAccount(Double amount, String description, Account account) {
-        Transaction transaction = new Transaction(account, LocalDateTime.now(), true, amount, description);
-        Double previousBalance = account.getCurrentBalance();
-        account.setCurrentBalance(previousBalance - amount);
-        account.addTransaction(transaction);
-        accountService.saveAccount(account);
-    }
+	private void updateAccount(Double amount, String description, Account account) {
+		Transaction transaction = new Transaction(account, LocalDateTime.now(), true, amount,
+				description);
+		Double previousBalance = account.getCurrentBalance();
+		account.setCurrentBalance(previousBalance - amount);
+		account.addTransaction(transaction);
+		accountService.saveAccount(account);
+	}
 
 }
